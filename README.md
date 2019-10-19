@@ -26,8 +26,9 @@
 | `@Test`  | `@Test` | ne prend plus de paramètres (capture d'exceptions et de timeout déléguée à la librairie d'assertion) |
 | `@Before` | `@BeforeEach` | - |
 | `@BeforeClass` | `@BeforeAll` | - |
-| `@After` | `@AfterClass` | - |
-| `@AfterEach` | `@AfterAll` | - |
+| `@After` | `@AfterEach` | - |
+|  `@AfterClass` | `@AfterAll` | - |
+| `@Ignore` | `@Disabled` | - |
 | - | `@DisplayName` | donner un nom à une classe ou à un test |
 | - | `@Nested` | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 
