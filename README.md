@@ -17,7 +17,7 @@
 - **JUnit Platform** : propose une API permettant aux outils de découvrir et exécuter des tests. Il définit une interface entre JUnit et les clients qui souhaitent exécuter les tests (IDE ou outils de build par exemple)
 
 
-# Annotations
+## Annotations
 
 - évolution des annotations :
 
