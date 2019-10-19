@@ -31,6 +31,5 @@
 | - | `@DisplayName` | donner un nom à une classe ou à un test |
 | - | `@Nested` | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 
-
 - plus besoin de déclarer ses classes de test et ses tests en tant que public, package (pas de mot clé) est suffisant
--la libraire d’assertion reste assez légère, possibilité d’utiliser une librairie annexe comme **AssertJ**
+- la libraire d’assertion reste assez légère, possibilité d’utiliser une librairie annexe comme **AssertJ**
