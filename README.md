@@ -3,8 +3,8 @@
 ## Introduction
 
 - framework de tests pour le langage Java
-- JUnit 5 est publié en 2017, JUnit daté de 2005
-- réécriture complète du framework avec des nouveautés (tests paramètrés, )
+- JUnit 5 a été publié en 2017, JUnit 4 en 2005
+- réécriture complète du framework avec des nouveautés (tests paramètrés, utilisation des nouveautés Java 8...)
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4
 - possibilité de conserver ses tests JUnit 4 et d'écrire les nouveaux avec JUnit 5 grâce à la bibliothèque `junit-vintage-engine`
