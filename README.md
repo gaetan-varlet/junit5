@@ -212,12 +212,51 @@ void testMethodeLongue(){
 }
 ```
 
+## Gestion des tests avec plusieurs assertions
+
+En JUnit 4, lorsqu'un test a plusieurs assertions, le test s'arrête sur la première erreur même s'il y a plusieurs erreurs. En JUnit 5, il est possible d'exécuter toutes les assertions et savoir lesquelles ont échoué avec l'assertion **assertAll()**
+
+```java
+@Test
+void testSumAvecAssertAll(){
+    assertAll(
+        () -> assertEquals(3, app.sum(1, 2)),
+        () -> assertEquals(-2, app.sum(3, -5)),
+        () -> assertNotEquals(5, app.sum(3, -2))
+    ); 
+}
+```
+
+## Les tests paramétrés
+
+Lorsqu'on veut tester plusieurs fois la même méthode avec des paramètres différents, on peut utiliser les test paramétrés avec l'annotation `@ParameterizedTest` pour éviter de copier coller des tests :
+
+```java
+// test copié collé
+@Test
+void testIsIdepInvalide(){
+    assertAll(
+        () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide(null)),
+        () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide("")),
+        () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide("toto"))
+    );
+}
+
+// test paramétré
+@ParameterizedTest
+@ValueSource(strings = {"", "toto"})
+@NullSource
+void parameterizedTestIsIdepInValide(String idep){
+    assertThrows(IllegalArgumentException.class, () -> app.isIdepValide(idep));
+}
+```
+
+- possibilité d'utiliser l'annotation `@CsvSource` à la place `@ValueSource` lorsqu'on veut utiliser plusieurs paramètres
+- possiblité de nommer les différents cas de test avec l'attribut `name` de `@ParameterizedTest` pour plus de lisibilité dans le rapport de tests (le nom par défaut et le nom des paramètres)
+
 ## Utilisation de JUnit 5 avec Spring Boot 2.2
 
 - intégration de JUnit 5 dans Spring Boot 2.2
-
-
-## Présentation d'assertJ
 
 
 ## Exemple d'utilisation de @DisplayName
@@ -226,9 +265,12 @@ void testMethodeLongue(){
 ## Exemple d'utilisation de @Nested
 
 
+## Présentation d'assertJ
+
+
 ## Documentation
 
-- [Exemple de base en français](https://blog.zenika.com/2017/12/13/quoi-de-neuf-avec-junit-5/)
+- [Documentation officielle](https://junit.org/junit5/)
 - [JUnit 5 (JM Doudoux)](https://www.jmdoudoux.fr/java/dej/chap-junit5.htm)
 - [JUnit : il serait temps de passer la 5ème !  (Devoxx 2019, vidéo youtube de 27 minutes)](https://www.youtube.com/watch?v=EfxwS54hdkM)
 

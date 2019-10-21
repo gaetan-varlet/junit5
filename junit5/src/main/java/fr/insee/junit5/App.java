@@ -13,5 +13,10 @@ public class App {
     public void methodeLongue() throws InterruptedException {
         Thread.sleep(2000);
     }
-
+    
+    public void isIdepValide(String idep){
+        if(idep == null || idep.trim().length() != 6){
+            throw new IllegalArgumentException();
+        }
+    }
 }
