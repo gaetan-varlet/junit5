@@ -1,10 +1,7 @@
 package varlet.gaetan;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
-import org.junit.Assert.assertEquals;
-import org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 public class AppTest {
