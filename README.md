@@ -254,10 +254,6 @@ void parameterizedTestIsIdepInValide(String idep){
 - possibilité d'utiliser l'annotation `@CsvSource` à la place `@ValueSource` lorsqu'on veut utiliser plusieurs paramètres
 - possiblité de nommer les différents cas de test avec l'attribut `name` de `@ParameterizedTest` pour plus de lisibilité dans le rapport de tests (le nom par défaut et le nom des paramètres)
 
-## Utilisation de JUnit 5 avec Spring Boot 2.2
-
-- intégration de JUnit 5 dans Spring Boot 2.2
-
 
 ## Exemple d'utilisation de @DisplayName
 
@@ -266,6 +262,11 @@ void parameterizedTestIsIdepInValide(String idep){
 
 
 ## Présentation d'assertJ
+
+
+## Utilisation de JUnit 5 avec Spring Boot
+
+- à partir de la version 2.2.0, JUnit 5 est intégré : plus besoin d'ajouter les dépendances
 
 
 ## Documentation
