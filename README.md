@@ -102,9 +102,115 @@ public class AppTest {
 
 ## Un premier test en JUnit 5
 
-- simple projet maven, ajout de la dépendance pour faire un test JUnit 5
-- ajout de la dépendance pour gérer les tests JUnit 4 sans la dépendance JUnit 4
+Création d'un nouveau projet Maven comme précédemment sans la dépendance JUnit 4, mais avev cla dépendance JUnit 5 à la place :
 
+```xml
+<!-- dépendance permettant d'écrire en JUnit 5 -->
+<dependency>
+  <groupId>org.junit.jupiter</groupId>
+  <artifactId>junit-jupiter</artifactId>
+  <version>5.5.2</version>
+  <scope>test</scope>
+</dependency>
+```
+
+Exemple de test en JUnit 5 :
+- les imports ont changé
+- les mots clés **public** ne sont plus nécessaires
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+
+import org.junit.jupiter.api.Test;
+
+class AppTestJUnit5 {
+    App app = new App();
+
+    @Test
+    void testSum() {
+        assertEquals(3, app.sum(1, 2));
+        assertEquals(-2, app.sum(3, -5));
+        assertNotEquals(5, app.sum(3, -2));
+    }
+}
+```
+
+## Migration à JUnit 5 sans réécrire les tests JUnit 4
+
+Ajout de la dépendance pour gérer les tests JUnit 4 sans la dépendance JUnit 4 :
+
+```xml
+<!-- dépendance permettant d'utiliser les test JUnit 4 -->
+<dependency>
+    <groupId>org.junit.vintage</groupId>
+    <artifactId>junit-vintage-engine</artifactId>
+    <version>5.5.2</version>
+    <scope>test</scope>
+</dependency>
+```
+
+```java
+import static org.junit.Assert.*;
+
+import org.junit.Test;
+
+public class AppTestJUnit4 {
+    App app = new App();
+
+    @Test
+    public void testSum() {
+        assertEquals(3, app.sum(1, 2));
+        assertEquals(-2, app.sum(3, -5));
+        assertNotEquals(5, app.sum(3, -2));
+    }
+}
+```
+
+## Gestion des exceptions et des timeouts
+
+Avec JUnit 4, possibilité de gérer les timeouts et les exceptions attendues dans les paramètres de l'annotation `@Test`, ce qui n'est plus possible en JUnit 5. Des nouvelles méthodes d'assertions ont été créé avec JUnit 5.
+
+Méthodes à tester :
+
+```java
+public void methodeRenvoyantException() {
+    throw new IllegalArgumentException();
+}
+
+public void methodeLongue() throws InterruptedException {
+    Thread.sleep(2000);
+}
+```
+
+En JUnit 4 :
+
+```java
+@Test(expected = IllegalArgumentException.class)
+public void testMethodeException() {
+    app.methodeRenvoyantException();
+}
+
+@Test(timeout = 3000)
+public void testMethodeLongue() throws InterruptedException {
+    app.methodeLongue();
+}
+```
+
+En JUnit 5 :
+
+```java
+import static org.junit.jupiter.api.Assertions.*;
+
+@Test
+void testMethodeException() {
+    assertThrows(IllegalArgumentException.class, () -> app.methodeRenvoyantException());
+}
+
+@Test
+void testMethodeLongue(){
+    assertTimeout(Duration.ofMillis(3000), () -> app.methodeLongue());
+}
+```
 
 ## Utilisation de JUnit 5 avec Spring Boot 2.2
 
@@ -112,9 +218,6 @@ public class AppTest {
 
 
 ## Présentation d'assertJ
-
-
-## Gestion des exceptions et timeout dans les assertions
 
 
 ## Exemple d'utilisation de @DisplayName
