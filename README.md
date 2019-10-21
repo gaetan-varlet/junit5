@@ -21,53 +21,81 @@
 
 - évolution des annotations :
 
-| Ancienne | Nouvelle | Info |
-| :---:    | :---: | :---: |
-| `@Test`  | `@Test` | ne prend plus de paramètres (capture d'exceptions et de timeout déléguée à la librairie d'assertion) |
-| `@Before` | `@BeforeEach` | - |
-| `@BeforeClass` | `@BeforeAll` | - |
-| `@After` | `@AfterEach` | - |
-|  `@AfterClass` | `@AfterAll` | - |
-| `@Ignore` | `@Disabled` | - |
-| - | `@DisplayName` | donner un nom à une classe ou à un test |
-| - | `@Nested` | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
+| Ancienne       | Nouvelle       | Info |
+| :---:          | :---:          | :---: |
+| `@Test`        | `@Test`        | ne prend plus de paramètres (capture d'exceptions et de timeout déléguée à la librairie d'assertion) |
+| `@Before     ` | `@BeforeEach`  | - |
+| `@BeforeClass` | `@BeforeAll`   | - |
+| `@After`       | `@AfterEach`   | - |
+|  `@AfterClass` | `@AfterAll`    | - |
+| `@Ignore`      | `@Disabled`    | - |
+| -              | `@DisplayName` | donner un nom à une classe ou à un test |
+| -              | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 
 - plus besoin de déclarer ses classes de test et ses tests en tant que public, package (pas de mot clé) est suffisant
 - la libraire d’assertion reste assez légère, possibilité d’utiliser une librairie annexe comme **AssertJ**
 
-## Exemple de test en JUnit 4
+## Exemple de test en JUnit 4
 
-création d'un projet maven avec la commande `mvn ...`
+Création d'un projet maven avec la commande `mvn archetype:generate -DgroupId=fr.insee.junit4 -DartifactId=junit4 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+
+Mise à jour du pom.xml :
 
 ```xml
-<dependency>
-    <groupId>junit</groupId>
-    <artifactId>junit</artifactId>
-    <version>4.12</version>
-    <scope>test</scope>
-</dependency>
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>fr.insee.junit4</groupId>
+  <artifactId>junit4</artifactId>
+  <version>1.0-SNAPSHOT</version>
+  <name>junit5</name>
+
+  <dependencies>
+    <dependency>
+      <groupId>junit</groupId>
+      <artifactId>junit</artifactId>
+      <version>4.12</version>
+      <scope>test</scope>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <release>11</release>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>
 ```
 
 ```java
 // création d'une méthode addition que l'on va tester
-public int sum(int a, int b) {
-    return a + b;
+public class App {
+    public int sum(int a, int b) {
+        return a + b;
+    }
 }
 
-
 // classe de test
-import static org.junit.Assert.assertEquals;
-
+import static org.junit.Assert.*;
 import org.junit.Test;
 
 public class AppTest {
-
     App app = new App();
 
     @Test
     public void testSum() {
         assertEquals(3, app.sum(1, 2));
         assertEquals(-2, app.sum(3, -5));
+        assertNotEquals(5, app.sum(3, -2));
     }
 }
 ```
@@ -78,7 +106,7 @@ public class AppTest {
 - ajout de la dépendance pour gérer les tests JUnit 4 sans la dépendance JUnit 4
 
 
-## Utilisation de JUnit 5 avec Spring Boot 2.2
+## Utilisation de JUnit 5 avec Spring Boot 2.2
 
 - intégration de JUnit 5 dans Spring Boot 2.2
 
@@ -95,7 +123,7 @@ public class AppTest {
 ## Exemple d'utilisation de @Nested
 
 
-## Documentation
+## Documentation
 
 - [Exemple de base en français](https://blog.zenika.com/2017/12/13/quoi-de-neuf-avec-junit-5/)
 - [JUnit 5 (JM Doudoux)](https://www.jmdoudoux.fr/java/dej/chap-junit5.htm)
