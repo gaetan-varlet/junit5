@@ -8,6 +8,7 @@
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4
 - possibilité de conserver ses tests JUnit 4 et d'écrire les nouveaux avec JUnit 5 grâce à la bibliothèque `junit-vintage-engine`
+- **maven-surefire-plugin en version 2.22 ou plus ?**
 
 
 ## Architecture
@@ -251,15 +252,70 @@ void parameterizedTestIsIdepInValide(String idep){
 }
 ```
 
-- possibilité d'utiliser l'annotation `@CsvSource` à la place `@ValueSource` lorsqu'on veut utiliser plusieurs paramètres
-- possiblité de nommer les différents cas de test avec l'attribut `name` de `@ParameterizedTest` pour plus de lisibilité dans le rapport de tests (le nom par défaut et le nom des paramètres)
+- possiblité de nommer les différents cas de test avec l'attribut `name` de `@ParameterizedTest` pour plus de lisibilité dans le rapport de tests
+    - le nom par défaut est le nom des paramètres
+    - possiblité d'utiliser les variables avec `{0}`, `{1}`...
+    - exemple : `@ParameterizedTest(name = "idep {0} est invalide")`
+
+- possibilité d'utiliser l'annotation `@CsvSource` à la place `@ValueSource` lorsqu'on veut utiliser plusieurs paramètres :
+
+```java
+@ParameterizedTest(name="Concatener {0} avec {1}")
+@CsvSource({"abc, def", "toto, tata"})
+public void testConcatenerChaine(String chaine1, String chaine2) {
+    assertEquals(chaine1+chaine2, app.concatenerChaine(chaine1, chaine2));
+}
+
+@ParameterizedTest(name="Concatener {0} avec {1}")
+@CsvSource({",abc", "abc,", ","})
+public void testConcatenerChaineEchoue(String chaine1, String chaine2) {
+    assertThrows(IllegalArgumentException.class, () -> app.concatenerChaine(chaine1, chaine2));
+}
+```
+
+Tests paramétrés avec des objets
+- utilisation de `@ParameterizedTest` et `@MethodSource` (cf vidéo youtube à 12')
 
 
 ## Exemple d'utilisation de @DisplayName
 
+Possibilité de surcharger le nom de la méthode dans le rapport de test avec `@DisplayName`
+
+```java
+@Test
+@DisplayName("methodeLongue doit prendre moins de 3 secondes")
+void testMethodeLongue(){
+    assertTimeout(Duration.ofMillis(3000), () -> app.methodeLongue());
+}
+```
+
+- il est aussi possible d'utiliser `@DisplayNameGeneration(ReplaceUnderscores.class)` sur la classe pour que les méthodes soit renommées dans le rapport de test en mettant des blancs à la place des 'underscores', ce qui évite de renseigner 2 fois la même chose dans le nom de la place et dans l'annotation `@DisplayName`
+
 
 ## Exemple d'utilisation de @Nested
 
+L'annotation `@Nested` permet d'imbriquer une classe de test dans une classe de test afin de regrouper des tests dans une sous-partie afin de faciliter la lecture du code et du rapport de test (équivalent du **describe** et **it** en JS)
+
+```java
+@Nested
+class testValiditeIdep {
+    @Test
+    void testIsIdepInvalide(){
+        assertAll(
+            () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide(null)),
+            () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide("")),
+            () -> assertThrows(IllegalArgumentException.class, () -> app.isIdepValide("toto"))
+        );
+    }
+
+    @ParameterizedTest(name = "idep {0} est invalide")
+    @ValueSource(strings = {"", " ", "toto"})
+    @NullSource
+    void parameterizedTestIsIdepInValide(String idep){
+        assertThrows(IllegalArgumentException.class, () -> app.isIdepValide(idep));
+    }
+}
+```
 
 ## Présentation d'assertJ
 

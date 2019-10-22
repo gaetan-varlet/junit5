@@ -19,4 +19,11 @@ public class App {
             throw new IllegalArgumentException();
         }
     }
+    
+    public String concatenerChaine(String chaine1, String chaine2) {
+   	    if(chaine1 != null && !chaine1.isBlank() && chaine2 != null && !chaine2.isBlank()) {
+   		    return chaine1.concat(chaine2);
+   	    }
+   	    throw new IllegalArgumentException(); 
+    }
 }
