@@ -322,12 +322,29 @@ class testValiditeIdep {
 
 ## Utilisation de JUnit 5 avec Spring Boot
 
-- à partir de la version 2.2.0, JUnit 5 est intégré : plus besoin d'ajouter les dépendances
+- pour les versions inférieures à la 2.2.0, il faut :
+    - exclure la dépendance `junit` (JUnit 4) de `spring-boot-starter-test`
+    - ajouter les dépendances Junit 5 nécessaires au projet
 
+- à partir de la version 2.2.0, JUnit 5 est intégré par défaut à la place de JUnit 4 : plus besoin d'ajouter les dépendances
+    - `junit-vintage-engine` est exclu de `spring-boot-starter-test` lors de la création d'un projet sur *Spring Initializr*, ce qui veut dire que les tests JUnit 4 ne compilent pas. En enlevant l'exclusion, les tests JUnit 4 refonctionnent
+
+```xml
+<dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-test</artifactId>
+    <scope>test</scope>
+    <exclusions>
+        <exclusion>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+        </exclusion>
+    </exclusions>
+</dependency>
+```
 
 ## Documentation
 
 - [Documentation officielle](https://junit.org/junit5/)
 - [JUnit 5 (JM Doudoux)](https://www.jmdoudoux.fr/java/dej/chap-junit5.htm)
 - [JUnit : il serait temps de passer la 5ème !  (Devoxx 2019, vidéo youtube de 27 minutes)](https://www.youtube.com/watch?v=EfxwS54hdkM)
-
