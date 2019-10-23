@@ -10,6 +10,12 @@
 - possibilité de conserver ses tests JUnit 4 et d'écrire les nouveaux avec JUnit 5 grâce à la bibliothèque `junit-vintage-engine`
 - **maven-surefire-plugin en version 2.22 ou plus ?**
 
+## Pourquoi faire des tests
+
+- bien écrire son code en respectant le **principe de responsabilité unique**
+- s'assurer que ce qu'on développe fait bien ce qui est attendu
+- s'assurer qu'il n'y a pas de régressions après une évolution
+
 
 ## Architecture
 
