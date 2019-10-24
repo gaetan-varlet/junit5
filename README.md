@@ -142,6 +142,48 @@ class AppTestJUnit5 {
 }
 ```
 
+### Evolution dans les assertions
+
+- possibilité d'écrire un message d'erreur quand le test échoue dans les assertions :
+    - dans JUnit 4, c'est le premier paramètre de l'assertion
+    - dans JUnit 5, c'est le dernier paramètre de l'assertion
+
+```java
+// JUnit 4 assertEquals(message, expected, actual)
+assertEquals("la somme de 1 et 2 doit faire 3", 3, app.sum(1, 2));
+// JUnit 5 assertEquals(expected, actual, message)
+assertEquals(3, app.sum(1, 2), "la somme de 1 et 2 doit faire 3");
+```
+
+Il faut donc bien penser à passer les messages en dernier paramètre si vous transformez les tests en JUnit 5, sinon :
+- risque de faire échouer des tests
+- risque que des tests passent alors qu'ils devraient échouer suite à une régression
+
+Exemple de test qui passe en JUnit 4 :
+```java
+public String tailleDeLaChaine(String chaine){
+    if(chaine == null){
+        return null;
+    }
+    return String.valueOf(chaine.length());
+}
+
+assertNotNull("lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
+```
+
+Passage en JUnit 5 avec oubli du passage du message en dernier paramètre de l'assertion et refactor de la méthode :
+- le test de non nullité porte donc sur la chaine de caractères en premier paramètre
+- le message d'erreur qui doit s'afficher si le test échoue est le retour de la fonction (null ici)
+- comme la chaine de caractères n'est pas nulle, le test va passer alors que le refactor de la méthode a changé le comportement de la fonction qui ne répond plus au besoin : le test passe donc a tord
+- en inversant le message et l'appel à la fonction, le test va bien échouer
+```java
+public String tailleDeLaChaine(String chaine){
+    return null;
+}
+
+assertNotNull("lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
+```
+
 ## Migration à JUnit 5 sans réécrire les tests JUnit 4
 
 Ajout de la dépendance pour gérer les tests JUnit 4 sans la dépendance JUnit 4 :

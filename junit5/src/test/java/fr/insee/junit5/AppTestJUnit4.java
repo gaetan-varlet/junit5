@@ -1,7 +1,6 @@
 package fr.insee.junit5;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotEquals;
+import static org.junit.Assert.*;
 
 import org.junit.Test;
 
@@ -24,5 +23,11 @@ public class AppTestJUnit4 {
     @Test(timeout = 3000)
     public void testMethodeLongue() throws InterruptedException {
         app.methodeLongue();
+    }
+
+    @Test
+    public void testTailleDeLaChaine(){
+        assertNotNull("lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine(""));
+        assertEquals("2", app.tailleDeLaChaine("az"));
     }
 }

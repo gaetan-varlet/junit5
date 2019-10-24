@@ -3,6 +3,8 @@ package fr.insee.junit5;
 import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTimeout;
 
@@ -80,6 +82,13 @@ class AppTestJUnit5 {
     @CsvSource({",abc", "abc,", ","})
     public void testConcatenerChaineEchoue(String chaine1, String chaine2) {
    	 assertThrows(IllegalArgumentException.class, () -> app.concatenerChaine(chaine1, chaine2));
+    }
+
+    @Test
+    public void testTailleDeLaChaine(){
+        assertNull(app.tailleDeLaChaine(null), "lorsque la chaîne de caractères est null, la méthode retourne null");
+        assertNotNull(app.tailleDeLaChaine(""), "lorsque la chaîne de caractères est non null, la méthode retourne sa taille");
+        assertEquals("2", app.tailleDeLaChaine("az"));
     }
 
 }

@@ -26,4 +26,11 @@ public class App {
    	    }
    	    throw new IllegalArgumentException(); 
     }
+
+    public String tailleDeLaChaine(String chaine){
+        if(chaine == null){
+            return null;
+        }
+        return String.valueOf(chaine.length());
+    }
 }
