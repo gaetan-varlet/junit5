@@ -28,16 +28,17 @@
 
 - évolution des annotations :
 
-| Ancienne       | Nouvelle       | Info |
-| :---:          | :---:          | :---: |
-| `@Test`        | `@Test`        | ne prend plus de paramètres (capture d'exceptions et de timeout déléguée à la librairie d'assertion) |
-| `@Before     ` | `@BeforeEach`  | - |
-| `@BeforeClass` | `@BeforeAll`   | - |
-| `@After`       | `@AfterEach`   | - |
-|  `@AfterClass` | `@AfterAll`    | - |
-| `@Ignore`      | `@Disabled`    | - |
-| -              | `@DisplayName` | donner un nom à une classe ou à un test |
-| -              | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
+| Ancienne              | Nouvelle       | Info  |
+| :---:                 | :---:          | :---: |
+| `@Test`               | `@Test`        | ne prend plus de paramètres (capture d'exceptions et de timeout déléguée à la librairie d'assertion) |
+| `@Before     `        | `@BeforeEach`  | -     |
+| `@BeforeClass`        | `@BeforeAll`   | -     |
+| `@After`              | `@AfterEach`   | -     |
+|  `@AfterClass`        | `@AfterAll`    | -     |
+| `@Ignore`             | `@Disabled`    | -     |
+| -                     | `@DisplayName` | donner un nom à une classe ou à un test |
+| -                     | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
+| `@RunWith` et `@Rule` | `@ExtendWith`  | -     |
 
 - plus besoin de déclarer ses classes de test et ses tests en tant que public, package (pas de mot clé) est suffisant
 - la libraire d’assertion reste assez légère, possibilité d’utiliser une librairie annexe comme **AssertJ**
@@ -365,8 +366,24 @@ class testValiditeIdep {
 }
 ```
 
-## Présentation d'assertJ
+## L'annotation @ExtendWith
 
+```java
+// JUnit 4
+import org.junit.runner.RunWith;
+import org.mockito.junit.MockitoJUnitRunner;
+@RunWith(MockitoJUnitRunner.class)
+import org.springframework.test.context.junit4.SpringRunner;
+@RunWith(SpringRunner.class)
+
+
+// JUnit 5
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.mockito.junit.jupiter.MockitoExtension;
+@ExtendWith(MockitoExtension.class)
+import org.springframework.test.context.junit.jupiter.SpringExtension;
+@ExtendWith(SpringExtension.class)
+```
 
 ## Utilisation de JUnit 5 avec Spring Boot
 
@@ -375,7 +392,9 @@ class testValiditeIdep {
     - ajouter les dépendances Junit 5 nécessaires au projet
 
 - à partir de la version 2.2.0, JUnit 5 est intégré par défaut à la place de JUnit 4 : plus besoin d'ajouter les dépendances
-    - `junit-vintage-engine` est exclu de `spring-boot-starter-test` lors de la création d'un projet sur *Spring Initializr*, ce qui veut dire que les tests JUnit 4 ne compilent pas. En enlevant l'exclusion, les tests JUnit 4 refonctionnent
+    - une exclusion de `junit-vintage-engine` de `spring-boot-starter-test` est fait par défaut lors de la création d'un projet sur *Spring Initializr*
+    - avec l'exclusion, les tests JUnit 4 ne compilent pas. En enlevant l'exclusion, les tests JUnit 4 refonctionnent
+    - il est conseillé de laisser l'exclusion quand vous n'avez pas/plus de tests JUnit 4 pour éviter d'utiliser les annotations Junit 4 à tord
 
 ```xml
 <dependency>
@@ -390,6 +409,11 @@ class testValiditeIdep {
     </exclusions>
 </dependency>
 ```
+
+## Présentation d'assertJ
+
+TODO
+
 
 ## Documentation
 
