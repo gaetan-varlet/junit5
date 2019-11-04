@@ -46,6 +46,8 @@
 
 ## Evolutions des annotations (2)
 
+| Ancienne              | Nouvelle       | Info  |
+| :---:                 | :---:          | :---: |
 | -                     | `@DisplayName` | donner un nom à une classe ou à un test |
 | -                     | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 | `@RunWith` et `@Rule` | `@ExtendWith`  | -     |
@@ -55,11 +57,15 @@
 
 ----
 
-## Exemple de test en JUnit 4
+## Exemple de test en JUnit 4 (1)
 
 Création d'un projet maven
-    - avec la commande `mvn archetype:generate -DgroupId=fr.insee.junit4 -DartifactId=junit4 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
-    - mise à jour du POM avec junit en version 4.12 et java 11
+- avec la commande `mvn archetype:generate -DgroupId=fr.insee.junit4 -DartifactId=junit4 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+- mise à jour du POM avec junit en version 4.12 et java 11
+
+----
+
+## Exemple de test en JUnit 4 (2)
 
 ```java
 // création d'une méthode addition que l'on va tester
