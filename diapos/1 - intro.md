@@ -30,9 +30,8 @@
 
 ----
 
-## Annotations
+## Evolutions des annotations (1)
 
-- évolution des annotations :
 
 | Ancienne              | Nouvelle       | Info  |
 | :---:                 | :---:          | :---: |
@@ -42,6 +41,11 @@
 | `@After`              | `@AfterEach`   | -     |
 |  `@AfterClass`        | `@AfterAll`    | -     |
 | `@Ignore`             | `@Disabled`    | -     |
+
+----
+
+## Evolutions des annotations (2)
+
 | -                     | `@DisplayName` | donner un nom à une classe ou à un test |
 | -                     | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 | `@RunWith` et `@Rule` | `@ExtendWith`  | -     |
@@ -51,50 +55,11 @@
 
 ----
 
-## Exemple de test en JUnit 4 (1)
+## Exemple de test en JUnit 4
 
-Création d'un projet maven avec la commande `mvn archetype:generate -DgroupId=fr.insee.junit4 -DartifactId=junit4 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
-
-Mise à jour du pom.xml :
-
-```xml
-<?xml version="1.0" encoding="UTF-8" ?>
-
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
-
-  <groupId>fr.insee.junit4</groupId>
-  <artifactId>junit4</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <name>junit5</name>
-
-  <dependencies>
-    <dependency>
-      <groupId>junit</groupId>
-      <artifactId>junit</artifactId>
-      <version>4.12</version>
-      <scope>test</scope>
-    </dependency>
-  </dependencies>
-
-  <build>
-    <plugins>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.8.1</version>
-        <configuration>
-          <release>11</release>
-        </configuration>
-      </plugin>
-    </plugins>
-  </build>
-</project>
-```
-
-----
-
-## Exemple de test en JUnit 4 (2)
+Création d'un projet maven
+    - avec la commande `mvn archetype:generate -DgroupId=fr.insee.junit4 -DartifactId=junit4 -DarchetypeArtifactId=maven-archetype-quickstart -DarchetypeVersion=1.4 -DinteractiveMode=false`
+    - mise à jour du POM avec junit en version 4.12 et java 11
 
 ```java
 // création d'une méthode addition que l'on va tester
@@ -122,9 +87,9 @@ public class AppTest {
 
 ----
 
-## Un premier test en JUnit 5
+## Un premier test en JUnit 5 (1)
 
-Création d'un nouveau projet Maven comme précédemment sans la dépendance JUnit 4, mais avev cla dépendance JUnit 5 à la place :
+Création d'un nouveau projet Maven comme précédemment sans la dépendance JUnit 4, mais avec la dépendance JUnit 5 à la place :
 
 ```xml
 <!-- dépendance permettant d'écrire en JUnit 5 -->
@@ -135,6 +100,10 @@ Création d'un nouveau projet Maven comme précédemment sans la dépendance JUn
   <scope>test</scope>
 </dependency>
 ```
+
+----
+
+## Un premier test en JUnit 5 (2)
 
 Exemple de test en JUnit 5 :
 - les imports ont changé
@@ -161,9 +130,7 @@ class AppTestJUnit5 {
 
 ### Evolution dans les assertions (1)
 
-- possibilité d'écrire un message d'erreur quand le test échoue dans les assertions :
-    - dans JUnit 4, c'est le premier paramètre de l'assertion
-    - dans JUnit 5, c'est le dernier paramètre de l'assertion
+- possibilité d'écrire un message d'erreur quand le test échoue dans les assertions : **premier** paramètre de l'assertion dans JUnit 4, alors que dans JUnit 5, c'est le **dernier** paramètre de l'assertion
 
 ```java
 // JUnit 4 assertEquals(message, expected, actual)
@@ -175,6 +142,10 @@ assertEquals(3, app.sum(1, 2), "la somme de 1 et 2 doit faire 3");
 Il faut donc bien penser à passer les messages en dernier paramètre si vous transformez les tests en JUnit 5, sinon :
 - risque de faire échouer des tests
 - risque que des tests passent alors qu'ils devraient échouer suite à une régression
+
+----
+
+### Evolution dans les assertions (2)
 
 Exemple de test qui passe en JUnit 4 :
 ```java
@@ -190,13 +161,14 @@ assertNotNull("lorsque la chaîne de caractères est non null, la méthode retou
 
 ----
 
-### Evolution dans les assertions (2)
+### Evolution dans les assertions (3)
 
 Passage en JUnit 5 avec oubli du passage du message en dernier paramètre de l'assertion et refactor de la méthode :
 - le test de non nullité porte donc sur la chaine de caractères en premier paramètre
 - le message d'erreur qui doit s'afficher si le test échoue est le retour de la fonction (null ici)
 - comme la chaine de caractères n'est pas nulle, le test va passer alors que le refactor de la méthode a changé le comportement de la fonction qui ne répond plus au besoin : le test passe donc a tord
 - en inversant le message et l'appel à la fonction, le test va bien échouer
+
 ```java
 public String tailleDeLaChaine(String chaine){
     return null;
@@ -260,7 +232,7 @@ public void methodeLongue() throws InterruptedException {
 
 ## Gestion des exceptions et des timeouts (2)
 
-En JUnit 4 :
+- en JUnit 4 :
 
 ```java
 @Test(expected = IllegalArgumentException.class)
@@ -274,7 +246,7 @@ public void testMethodeLongue() throws InterruptedException {
 }
 ```
 
-En JUnit 5 :
+- en JUnit 5 :
 
 ```java
 import static org.junit.jupiter.api.Assertions.*;
