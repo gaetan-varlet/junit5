@@ -26,3 +26,17 @@ hs_err_pid*
 */.settings
 */.project
 */.classpath
+
+.idea/
+*.iml
+*.iws
+*.eml
+out/
+.DS_Store
+.svn
+log/*.log
+tmp/**
+node_modules/
+.sass-cache
+revealjs/css/reveal.min.css
+revealjs/js/reveal.min.js
