@@ -1,4 +1,4 @@
-# Présentation JUnit 5
+# JUnit, passons la 5ème !
 
 [Gaëtan Varlet](https://github.com/gaetan-varlet)
 
