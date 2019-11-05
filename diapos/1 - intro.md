@@ -163,7 +163,8 @@ public String tailleDeLaChaine(String chaine){
     return String.valueOf(chaine.length());
 }
 
-assertNotNull("lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
+assertNotNull(
+    "lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
 ```
 
 ----
@@ -181,7 +182,8 @@ public String tailleDeLaChaine(String chaine){
     return null;
 }
 
-assertNotNull("lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
+assertNotNull(
+    "lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
 ```
 
 ----
@@ -320,7 +322,6 @@ void parameterizedTestIsIdepInValide(String idep){
     - le nom par défaut est le nom des paramètres
     - possiblité d'utiliser les variables avec `{0}`, `{1}`...
     - exemple : `@ParameterizedTest(name = "idep {0} est invalide")`
-
 - possibilité d'utiliser l'annotation `@CsvSource` à la place `@ValueSource` lorsqu'on veut utiliser plusieurs paramètres :
 
 ```java
@@ -411,7 +412,6 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 - pour les versions inférieures à la 2.2.0, il faut :
     - exclure la dépendance `junit` (JUnit 4) de `spring-boot-starter-test`
     - ajouter les dépendances Junit 5 nécessaires au projet
-
 - à partir de la version 2.2.0, JUnit 5 est intégré par défaut à la place de JUnit 4 : plus besoin d'ajouter les dépendances
     - une exclusion de `junit-vintage-engine` de `spring-boot-starter-test` est fait par défaut lors de la création d'un projet sur *Spring Initializr*
     - avec l'exclusion, les tests JUnit 4 ne compilent pas. En enlevant l'exclusion, les tests JUnit 4 refonctionnent
@@ -437,7 +437,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 TODO
 
-----
+<!-- -->
 
 ## Documentation
 
