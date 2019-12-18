@@ -13,7 +13,7 @@
 ## JUnit 5 en quelques mots
 
 - framework de tests pour le langage Java
-- JUnit 5 a été publié en 2017, JUnit 4 en 2005
+- JUnit 5 a été publié en 2017, JUnit 4 en 2005 (dernière version 4.12 de décembre 2014)
 - réécriture complète du framework avec des nouveautés (tests paramètrés, utilisation des nouveautés Java 8...)
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4
@@ -369,7 +369,7 @@ void testMethodeLongue(){
 }
 ```
 
-- il est aussi possible d'utiliser `@DisplayNameGeneration(ReplaceUnderscores.class)` sur la classe pour que les méthodes soit renommées dans le rapport de test en mettant des blancs à la place des 'underscores', ce qui évite de renseigner 2 fois la même chose dans le nom de la place et dans l'annotation `@DisplayName`
+- il est aussi possible d'utiliser `@DisplayNameGeneration(ReplaceUnderscores.class)` sur la classe pour que les méthodes soit renommées dans le rapport de test en mettant des blancs à la place des 'underscores', ce qui évite de renseigner 2 fois la même chose dans le nom de la méthode et dans l'annotation `@DisplayName`
 
 ----
 
