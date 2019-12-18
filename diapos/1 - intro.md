@@ -18,8 +18,6 @@
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4
 - possibilité de conserver ses tests JUnit 4 et d'écrire les nouveaux avec JUnit 5 grâce à la bibliothèque `junit-vintage-engine`
-- Maven Surefire Plugin (lanceur de test) en version 2.22 au mininmum, sinon les tests en JUnit 5 ne sont pas reconnus et exécutés
-- par défaut (en JUnit 4 et 5), les noms des classes de tests doivent commencer ou finir par *Test*, sinon elles ne sont pas détectées et aucun test ne sera lancé
 
 ----
 
@@ -113,6 +111,21 @@ Création d'un nouveau projet Maven comme précédemment sans la dépendance JUn
 
 ## Un premier test en JUnit 5 (2)
 
+- Maven Surefire Plugin (lanceur de test) doit être en version 2.22 au mininmum, sinon les tests en JUnit 5 ne sont pas reconnus et exécutés par Maven
+- par défaut (en JUnit 4 et 5), les noms des classes de tests doivent commencer ou finir par *Test*, sinon elles ne sont pas détectées et aucun test ne sera lancé
+
+```xml
+<plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-surefire-plugin</artifactId>
+    <version>2.22.2</version>
+</plugin>
+```
+
+----
+
+## Un premier test en JUnit 5 (3)
+
 Exemple de test en JUnit 5 :
 - les imports ont changé
 - les mots clés **public** ne sont plus nécessaires
@@ -122,7 +135,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
-class AppTestJUnit5 {
+class TestJUnit5 {
     App app = new App();
 
     @Test
@@ -208,7 +221,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class AppTestJUnit4 {
+public class TestJUnit4 {
     App app = new App();
 
     @Test
