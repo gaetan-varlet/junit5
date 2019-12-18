@@ -18,7 +18,8 @@
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4
 - possibilité de conserver ses tests JUnit 4 et d'écrire les nouveaux avec JUnit 5 grâce à la bibliothèque `junit-vintage-engine`
-- **maven-surefire-plugin en version 2.22 ou plus ?**
+- Maven Surefire Plugin (lanceur de test) en version 2.22 au mininmum, sinon les tests en JUnit 5 ne sont pas reconnus et exécutés
+- par défaut (en JUnit 4 et 5), les noms des classes de tests doivent commencer ou finir par *Test*, sinon elles ne sont pas détectées et aucun test ne sera lancé
 
 ----
 

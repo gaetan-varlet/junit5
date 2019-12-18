@@ -4,7 +4,7 @@ import static org.junit.Assert.*;
 
 import org.junit.Test;
 
-public class AppTestJUnit4 {
+public class TestJUnit4 {
 
     App app = new App();
 
