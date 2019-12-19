@@ -37,7 +37,7 @@ public class TestJUnit4 {
 
 ## Migration à JUnit 5 sans réécrire les tests JUnit 4
 
-remplacer la dépendance JUnit 4 par la dépendance JUnit 5 et corriger les tests qui sont maintenant en erreur :
+remplacer la dépendance JUnit 4 par la dépendance JUnit 5 (`junit-jupiter`) et corriger les tests qui sont maintenant en erreur :
 - mise à jour des annotations et des imports
 - reprise de l'ordre des messages dans les assertions (voir diapos suivantes)
 - reprise des tests qui avaient des paramètres dans l'annotation `@Test` avec les nouvelles assertions (voir partie suivante)
@@ -80,7 +80,7 @@ assertNotNull(
 
 ### Evolution dans les assertions (3)
 
-Passage en **JUnit 5** avec oubli du passage du message en dernier paramètre de l'assertion et refactor de la méthode :
+Refactor de la méthode et passage en **JUnit 5** avec oubli du passage du message en dernier paramètre de l'assertion :
 
 ```java
 public String tailleDeLaChaine(String chaine){
