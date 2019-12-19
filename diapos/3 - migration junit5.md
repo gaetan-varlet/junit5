@@ -4,7 +4,7 @@
 
 ## Migration à JUnit 5 sans réécrire les tests JUnit 4
 
-Ajout de la dépendance pour gérer les tests JUnit 4 en enlenvant la dépendance JUnit 4 :
+Ajout de la dépendance JUnit 5 qui permet de gérer les tests écrit en versions 3 et 4 (et suppression de la dépendance JUnit 4) :
 
 ```xml
 <!-- dépendance permettant d'utiliser les test JUnit 4 -->
@@ -37,10 +37,10 @@ public class TestJUnit4 {
 
 ## Migration à JUnit 5 sans réécrire les tests JUnit 4
 
-remplacer la dépendance JUnit 4 par la dépendance JUnit 5 et corriger les tests en erreur :
+remplacer la dépendance JUnit 4 par la dépendance JUnit 5 et corriger les tests qui sont maintenant en erreur :
 - mise à jour des annotations et des imports
-- reprise de l'ordre des messages dans les assertions (diapos suivantes)
-- reprise des tests qui avaient des paramètres dans l'annotation `@Test` avec les nouvelles assertions (partie suivante)
+- reprise de l'ordre des messages dans les assertions (voir diapos suivantes)
+- reprise des tests qui avaient des paramètres dans l'annotation `@Test` avec les nouvelles assertions (voir partie suivante)
 
 ----
 
@@ -80,11 +80,7 @@ assertNotNull(
 
 ### Evolution dans les assertions (3)
 
-Passage en JUnit 5 avec oubli du passage du message en dernier paramètre de l'assertion et refactor de la méthode :
-- le test de non nullité porte donc sur la chaine de caractères en premier paramètre
-- le message d'erreur qui doit s'afficher si le test échoue est le retour de la fonction (null ici)
-- comme la chaine de caractères n'est pas nulle, le test va passer alors que le refactor de la méthode a changé le comportement de la fonction qui ne répond plus au besoin : le test passe donc a tord
-- en inversant le message et l'appel à la fonction, le test va bien échouer
+Passage en **JUnit 5** avec oubli du passage du message en dernier paramètre de l'assertion et refactor de la méthode :
 
 ```java
 public String tailleDeLaChaine(String chaine){
@@ -94,3 +90,8 @@ public String tailleDeLaChaine(String chaine){
 assertNotNull(
     "lorsque la chaîne de caractères est non null, la méthode retourne sa taille", app.tailleDeLaChaine("toto"));
 ```
+
+- le test de non nullité porte donc sur la chaine de caractères en premier paramètre
+- le message d'erreur qui doit s'afficher si le test échoue est le retour de la fonction (null ici)
+- comme la chaine de caractères n'est pas nulle, le test va passer alors que le refactor de la méthode a changé le comportement de la fonction qui ne répond plus au besoin : le test passe donc a tord
+- en inversant le message et l'appel à la fonction, le test va bien échouer

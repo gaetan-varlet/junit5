@@ -6,9 +6,9 @@
 
 Avec JUnit 4, possibilité de gérer les timeouts et les exceptions attendues dans les paramètres de l'annotation `@Test`, ce qui n'est plus possible en JUnit 5. Des nouvelles méthodes d'assertions ont été créé avec JUnit 5.
 
-Méthodes à tester :
-
 ```java
+// Méthodes à tester :
+
 public void methodeRenvoyantException() {
     throw new IllegalArgumentException();
 }
@@ -56,7 +56,8 @@ void testMethodeLongue(){
 
 ## Gestion des tests avec plusieurs assertions
 
-En JUnit 4, lorsqu'un test a plusieurs assertions, le test s'arrête sur la première erreur même s'il y a plusieurs erreurs. En JUnit 5, il est possible d'exécuter toutes les assertions et savoir lesquelles ont échoué avec l'assertion **assertAll()**
+En JUnit 4, lorsqu'un test a plusieurs assertions, le test s'arrête sur la première erreur même s'il y a plusieurs erreurs.  
+En JUnit 5, il est possible d'exécuter toutes les assertions et savoir lesquelles ont échoué avec l'assertion **assertAll()**
 
 ```java
 @Test
