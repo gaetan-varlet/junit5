@@ -12,6 +12,7 @@
 | `@After`              | `@AfterEach`   | -     |
 |  `@AfterClass`        | `@AfterAll`    | -     |
 | `@Ignore`             | `@Disabled`    | -     |
+| -                     | `@DisplayName` | donner un nom à une classe ou à un test |
 
 ----
 
@@ -19,7 +20,6 @@
 
 | Ancienne              | Nouvelle       | Info  |
 | :---:                 | :---:          | :---: |
-| -                     | `@DisplayName` | donner un nom à une classe ou à un test |
 | -                     | `@Nested`      | permet d'imbriquer une classe de test dans une classe de test (équivalent du **describe** et **it** en JS) |
 | `@Category`           | `@Tag`         | créer des groupes de tests à exécuter spécifiquement |
 | `@RunWith` et `@Rule` | `@ExtendWith`  | -     |
