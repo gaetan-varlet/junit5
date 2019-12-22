@@ -60,5 +60,30 @@ void testEgaliteList() {
     assertThat(liste).contains("a", "c");
     assertThat(liste).doesNotContain("d");
     assertThat(liste).containsExactly("a", "b", "c");
+
+    // possibilité de chaîner les tests
+    assertThat(liste).hasSize(3).contains("a", "b").doesNotContain("d").containsExactly("a", "b", "c");
 }
+```
+
+----
+
+## Exemple de test en erreur
+
+```java
+// avec une assertions JUnit
+Assertions.assertFalse(liste.contains("c"));
+
+org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
+
+// avec une assertion assertJ
+assertThat(liste).hasSize(3).doesNotContain("c");
+
+java.lang.AssertionError: 
+Expecting
+ <["a", "b", "c"]>
+not to contain
+ <["c"]>
+but found
+ <["c"]>
 ```
