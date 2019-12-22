@@ -4,7 +4,8 @@
 
 ## Présentation d'assertJ
 
-bibliothèque qui permet d'écrire des assertions plus expressives que les assertions standards proposées par JUnit
+- bibliothèque qui permet d'écrire des assertions plus expressives que les assertions standards proposées par JUnit
+- meilleure lisibilité des tests et des erreurs lorsqu'elles se produisent
 
 ```xml
 <dependency>
@@ -43,7 +44,7 @@ void testEgaliteString() {
 @Test
 void testEgaliteList() {
     List<String> liste = List.of("a", "b", "c");
-    // on souhaite que la liste est de taille 3
+    // on souhaite vérifier que la liste est de taille 3
     // qu'elle contient a et c, qu'elle ne contient pas d
     // qu'elle contient exactement dans l'ordre a, b et c
 
