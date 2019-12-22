@@ -77,7 +77,7 @@ Assertions.assertFalse(liste.contains("c"));
 org.opentest4j.AssertionFailedError: expected: <false> but was: <true>
 
 // avec une assertion assertJ
-assertThat(liste).hasSize(3).doesNotContain("c");
+assertThat(liste).doesNotContain("c");
 
 java.lang.AssertionError: 
 Expecting
