@@ -13,7 +13,7 @@
 ## JUnit 5 en quelques mots
 
 - framework de tests pour le langage Java
-- JUnit 5 a été publié en 2017, JUnit 4 en 2005 (dernière version 4.12 de décembre 2014)
+- JUnit 4 a été publié en 2005 (dernières versions : 4.12 de décembre 2014 et 4.13 en janvier 2020), JUnit 5 a été publié en 2017
 - réécriture complète du framework avec des nouveautés (tests paramètrés, utilisation des nouveautés Java 8...)
 - nécessite Java 8+
 - l'utilisation est similaire à JUnit 4

@@ -24,9 +24,7 @@
 | `@Category`           | `@Tag`         | créer des groupes de tests à exécuter spécifiquement |
 | `@RunWith` et `@Rule` | `@ExtendWith`  | -     |
 
-Autres évolutions :
-- plus besoin de déclarer ses classes de test et ses tests en tant que public, package (pas de mot clé) est suffisant
-- la libraire d’assertion reste assez légère, possibilité d’utiliser une librairie annexe comme **AssertJ**
+Autre évolution : plus besoin de déclarer ses classes de test et ses tests en tant que public, package (pas de mot clé) est suffisant.
 
 ----
 
